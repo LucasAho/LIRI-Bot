@@ -28,6 +28,7 @@ var spotSong;
 var movieName;
 var randoTime;
 
+//Node Variables
 var cmdIn  = process.argv[2];
 var srchIn = process.argv[3];
 var axios = require("axios");
@@ -39,13 +40,16 @@ axiosHandler = (url) => {
     console.log(url);
     axios.get(url).then(
         function(response) {
+            if (response.data.length === 0) {
+                console.log("No upcoming shows, sorry!")
+            } else {
             console.log("This band is playing at " + response.data[0].venue.name);
             console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
             let dateRaw = response.data[0].datetime;
             var moment = require('moment');
             moment(dateRaw).format("MM/DD/YYYY");
             console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
-
+            }
     })
     .catch(function(error) {
         if (error.response) {
@@ -69,7 +73,7 @@ axiosHandler = (url) => {
     });
 }
 
-
+//Function creates useable URL to run into axios
 conFunc = (str) => {
     var artist = str;
     
@@ -85,6 +89,7 @@ conFunc = (str) => {
     axiosHandler(bandURL); 
 }
 
+//Checks initial command
 if (cmdIn === concertSearch) {
     conFunc(srchIn);    
 } else if (cmdIn === spotifySearch) {
