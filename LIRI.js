@@ -33,13 +33,18 @@ var srchIn = process.argv[3];
 var axios = require("axios");
 var nodeArgs = process.argv;
 
+
+//Function runs a URL into axios request
 axiosHandler = (url) => {
     console.log(url);
     axios.get(url).then(
         function(response) {
             console.log("This band is playing at " + response.data[0].venue.name);
             console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
-            console.log("On " + response.data[0].datetime);
+            let dateRaw = response.data[0].datetime;
+            var moment = require('moment');
+            moment(dateRaw).format("MM/DD/YYYY");
+            console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
 
     })
     .catch(function(error) {
