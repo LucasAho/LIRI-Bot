@@ -19,7 +19,6 @@ var spotifySearch = "spotify-this-song";
 var movieSearch = "movie-this";
 var randomPick = "do-what-it-says";
 
-var conArt;
 var spotSong;
 var movieName;
 var randoTime;
@@ -43,10 +42,12 @@ var spotify = new Spotify(keys.spotify);
 axiosHandler = (url) => {
     axios.get(url).then(
         function(response) {
-            if (response.data.length === 0) {
+            if (nodeArgs.length === 3) {
+                console.log("Please enter a band to see if a show is coming near you!");
+            }else if (response.data.length === 0) {
                 console.log("No upcoming shows, sorry!")
             } else {
-                console.log("This band is playing at " + response.data[0].venue.name);
+                console.log("Your band is playing at " + response.data[0].venue.name);
                 console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
                 let dateRaw = response.data[0].datetime;
                 var moment = require('moment');
@@ -111,24 +112,21 @@ spotFunc = (str) => {
     })
     .catch(function(err) {
         console.error('Error occured: ' +  err);
-    });
-    //Display artist, song name, preview link to song, album of song
-    //no song = "The Sign" by Ace of Base
-    
-     
+    });    
 }
 
 //Checks initial command
 cmdHandler = (arr) => {
  
     let srchTrue = nodeArgs[3];
-
     //Combining multiword search arguments
 
     for (var i = 4; i < arr.length; i++) {        
         if (i > 2 && i < arr.length) {
+            
             srchTrue = srchTrue + "+" + arr[i];
         } else {
+            
             srchTrue += arr[i];      
         }
     }
