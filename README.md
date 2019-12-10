@@ -25,7 +25,6 @@ This will then log info and links relevant to the user's query.
     "SPOTIFY_ID= yourID
     SPOTIFY_SECRET= yourSecret"
     You can get your own Id here: https://developer.spotify.com/dashboard/
-    package-lock.json, package.json, and node_modules were all downloaded by the NPM method.
     * random.txt: Holds command and search argument for the do-what-it-says command from user. Eventually I intend to add to and randomly choose from the available options. 
     * log.txt: All input and output from terminal that is pertinent to user is stored to this file.
 Remaining files are npm installs through node. 
