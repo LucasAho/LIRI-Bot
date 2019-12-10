@@ -36,11 +36,7 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 
-var spotify = new Spotify({
-    id: "35c51e4efab94522b0561800124e11fa",
-    secret: "9c8e9700560749eab62cc451bb732a0b"
-    //keys.spotify
-});
+var spotify = new Spotify(keys.spotify);
 
 
 //Function runs a URL into axios request
