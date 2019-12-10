@@ -11,12 +11,8 @@
     //Screenshots/GIF/and/or video format showing working app
         //link to ^ in README
         
-// require("dotenv").config();
-var keys = require("./keys.js");
-// var spotify = new Spotify(keys.spotify);
+
 // spotify-this-song;
-
-
 
 var concertSearch = "concert-this";
 var spotifySearch = "spotify-this-song";
@@ -31,24 +27,35 @@ var randoTime;
 //Node Variables
 var cmdIn  = process.argv[2];
 var srchIn = process.argv[3];
+
 var axios = require("axios");
 var nodeArgs = process.argv;
+
+//Spotify variables
+require("dotenv").config();
+var keys = require("./keys.js");
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+    id: "35c51e4efab94522b0561800124e11fa",
+    secret: "9c8e9700560749eab62cc451bb732a0b"
+    //keys.spotify
+});
 
 
 //Function runs a URL into axios request
 axiosHandler = (url) => {
-    console.log(url);
     axios.get(url).then(
         function(response) {
             if (response.data.length === 0) {
                 console.log("No upcoming shows, sorry!")
             } else {
-            console.log("This band is playing at " + response.data[0].venue.name);
-            console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
-            let dateRaw = response.data[0].datetime;
-            var moment = require('moment');
-            moment(dateRaw).format("MM/DD/YYYY");
-            console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
+                console.log("This band is playing at " + response.data[0].venue.name);
+                console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
+                let dateRaw = response.data[0].datetime;
+                var moment = require('moment');
+                moment(dateRaw).format("MM/DD/YYYY");
+                console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
             }
     })
     .catch(function(error) {
@@ -73,40 +80,79 @@ axiosHandler = (url) => {
     });
 }
 
+
 //Function creates useable URL to run into axios
 conFunc = (str) => {
-    var artist = str;
-    
-    for (var i = 4; i < nodeArgs.length; i++) {
-
-        if (i > 2 && i < nodeArgs.length) {
-          artist = artist + "+" + nodeArgs[i];
-        } else {
-          artist += nodeArgs[i];      
-        }
-      }
-    var bandURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    //Creates URL for axios   
+    var bandURL = "https://rest.bandsintown.com/artists/" + str + "/events?app_id=codingbootcamp";
     axiosHandler(bandURL); 
 }
 
+spotFunc = (str) => {
+    if (str === undefined) {
+        str = "The Sign";
+        console.log(str);
+    } else {
+        console.log(str);
+    }
+    var spotURL = "https://api.spotify.com/v1/tracks/" + str;
+    spotify
+    .search({type: 'track', 
+    query: str,
+    limit: 10
+    })
+    .then(function(response) {
+        console.log("Here are the top relevant tracks: ")
+        response.tracks.items.forEach(function(element) {
+            var elIndex = response.tracks.items.indexOf(element);
+            console.log("Track " + elIndex);
+            console.log("Song Name: " + response.tracks.items[elIndex].name);
+            console.log("Song Artist: " + response.tracks.items[elIndex].artists[0].name);
+            console.log("Album Name: " + response.tracks.items[elIndex].album.name);
+            console.log("Song Link: " + response.tracks.items[elIndex].external_urls.spotify);
+            console.log();
+        })       
+    })
+    .catch(function(err) {
+        console.error('Error occured: ' +  err);
+    });
+    //Display artist, song name, preview link to song, album of song
+    //no song = "The Sign" by Ace of Base
+    
+     
+}
+
 //Checks initial command
-if (cmdIn === concertSearch) {
-    conFunc(srchIn);    
-} else if (cmdIn === spotifySearch) {
-    console.log("Songs are illegal");
-    var conArt = srchIn;
-    console.log(conArt)
-} else if (cmdIn === movieSearch) {
-    console.log("These movies are censored");
-    var conArt = srchIn;
-    console.log(conArt)
-} else if (cmdIn === randomPick) {
-    console.log("Good. You are under my control");
-    var conArt = srchIn;
-    console.log(conArt)
-} else {
-    console.log("Bruh, you gotta pick one");
-} 
+cmdHandler = (arr) => {
+ 
+    let srchTrue = nodeArgs[3];
 
+    //Combining multiword search arguments
 
+    for (var i = 4; i < arr.length; i++) {        
+        if (i > 2 && i < arr.length) {
+            srchTrue = srchTrue + "+" + arr[i];
+        } else {
+            srchTrue += arr[i];      
+        }
+    }
+    
+    //Choosing a command path
+    if (cmdIn === concertSearch) {
+        conFunc(srchTrue);    
+    } else if (cmdIn === spotifySearch) {
+        spotFunc(srchTrue);
+    } else if (cmdIn === movieSearch) {
+        console.log("These movies are censored");
+        var conArt = srchIn;
+        console.log(conArt)
+    } else if (cmdIn === randomPick) {
+        console.log("Good. You are under my control");
+        var conArt = srchIn;
+        console.log(conArt)
+    } else {
+        console.log("Bruh, you gotta pick one");
+    } 
 
+}
+cmdHandler(nodeArgs);
