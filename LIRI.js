@@ -130,7 +130,6 @@ spotFunc = (str) => {
         //This song will be searched if no argument is entered
         str = "The Sign";
     } 
-    console.log(str);
     //Spotify api search
     spotify
     .search({type: 'track', query: str, limit: 10
@@ -139,8 +138,8 @@ spotFunc = (str) => {
         response.tracks.items.forEach(function(element) {
             
             var elIndex = response.tracks.items.indexOf(element);
-            console.log(elIndex);
-            console.log("Track " + elIndex);
+            var indexNum = parseInt(elIndex) + 1;
+            console.log("Track " + indexNum);
             console.log("Song Name: " + response.tracks.items[elIndex].name);
             console.log("Song Artist: " + response.tracks.items[elIndex].artists[0].name);
             console.log("Album Name: " + response.tracks.items[elIndex].album.name);

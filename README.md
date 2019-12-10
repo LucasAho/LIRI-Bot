@@ -1,5 +1,5 @@
 # LIRI-Bot
-Its like SIRI! But instead of Speach Interpretation, LIRI interprets terminal commands to search for songs, concerts, and movies, and logs all relevant info to a txt file and terminal. It does this through a multitude of APIs and js programs.
+Its like SIRI! But instead of Speach Interpretation, LIRI interprets terminal commands to search for songs, concerts, and movies, and logs all relevant info to a txt file and terminal. It does this through a multitude of APIs and js programs. As proof that the project fills out the assignment outline, visit https://docs.google.com/presentation/d/1OHnlQe3L3DP8pS_BrzDBiYZGjtU9CC9Vx-YXrP_qmec/edit?usp=sharing to view screenshots of each function.
 
 ## App Purpose and Function
 This CLI allows a user to search for songs, concerts, and movies from one location, allowing the user to find relevant info based on their searches. The user can use the app by typing 
