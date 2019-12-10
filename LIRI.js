@@ -1,59 +1,55 @@
-//Search spotify for songs, bands in town for concerts, and OMDB for movies
-    //api reader with axios packages
-        //https://www.npmjs.com/package/node-spotify-api
-        //https://www.npmjs.com/package/axios
-        //http://www.omdbapi.com/
-        //http://www.artists.bandsintown.com/bandsintown-api
-        //https://www.npmjs.com/package/moment
-        //https://www.npmjs.com/package/dotenv
-
 //Turned in as CLI app
     //Screenshots/GIF/and/or video format showing working app
         //link to ^ in README
-        
 
-// spotify-this-song;
+//requires
+var axios = require("axios");
+var fs = require('fs');
+require("dotenv").config();
 
+//Variables are set to possible commands from user
 var concertSearch = "concert-this";
 var spotifySearch = "spotify-this-song";
 var movieSearch = "movie-this";
 var randomPick = "do-what-it-says";
 
-var spotSong;
-var movieName;
-var randoTime;
-
 //Node Variables
 var cmdIn  = process.argv[2];
-var srchIn = process.argv[3];
-
-var axios = require("axios");
 var nodeArgs = process.argv;
 
 //Spotify variables
-require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
-
 var spotify = new Spotify(keys.spotify);
 
 
-//Function runs a URL into axios request
-axiosHandler = (url) => {
+//Handler chooses path to use for URL and runs it into axios
+axiosHandler = (url, path) => {
     axios.get(url).then(
         function(response) {
-            if (nodeArgs.length === 3) {
+            let branch = path;
+            //Decision tree to pick API to use
+            if (nodeArgs.length === 3 && branch === concertSearch && cmdIn !== randomPick) {
                 console.log("Please enter a band to see if a show is coming near you!");
-            }else if (response.data.length === 0) {
+            } else if (response.data.length === 0 && branch === concertSearch) {
                 console.log("No upcoming shows, sorry!")
-            } else {
+            } else if (branch === concertSearch) {
                 console.log("Your band is playing at " + response.data[0].venue.name);
                 console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
                 let dateRaw = response.data[0].datetime;
                 var moment = require('moment');
                 moment(dateRaw).format("MM/DD/YYYY");
                 console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
-            }
+            } else if (branch === movieSearch) {
+                console.log("Movie Title: " + response.data.Title);
+                console.log("Release Year: " + response.data.Year);
+                console.log("IMDB Rating: " + response.data.Ratings[0].Value);
+                console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+                console.log("Country of Production: " + response.data.Country);
+                console.log("Language(s) of Film: " + response.data.Language);
+                console.log("Plot Summary: " + response.data.Plot);
+                console.log("Lead Actors: " + response.data.Actors);
+            }            
     })
     .catch(function(error) {
         if (error.response) {
@@ -82,23 +78,31 @@ axiosHandler = (url) => {
 conFunc = (str) => {
     //Creates URL for axios   
     var bandURL = "https://rest.bandsintown.com/artists/" + str + "/events?app_id=codingbootcamp";
-    axiosHandler(bandURL); 
+    var pickBranch = "concert-this"
+    axiosHandler(bandURL, pickBranch); 
 }
 
+//Function creates URL to run into axios handler
+movieFunc = (str) => {
+    if (str === undefined) {
+        str = "mr+nobody";
+    }
+    //Creates URL for axios
+    var movieURL = "http://www.omdbapi.com/?t=" + str + "&y=&plot=short&apikey=trilogy";
+    var pickBranch = "movie-this"
+    axiosHandler(movieURL, pickBranch);
+}
+
+//Function runs user arg into spotify api and logs needed info
 spotFunc = (str) => {
     if (str === undefined) {
+        //This song will be searched if no argument is entered
         str = "The Sign";
-        console.log(str);
-    } else {
-        console.log(str);
     }
-    var spotURL = "https://api.spotify.com/v1/tracks/" + str;
+    //Spotify api search
     spotify
-    .search({type: 'track', 
-    query: str,
-    limit: 10
-    })
-    .then(function(response) {
+    .search({type: 'track', query: str, limit: 10
+    }).then(function(response) {
         console.log("Here are the top relevant tracks: ")
         response.tracks.items.forEach(function(element) {
             var elIndex = response.tracks.items.indexOf(element);
@@ -115,38 +119,50 @@ spotFunc = (str) => {
     });    
 }
 
+
 //Checks initial command
 cmdHandler = (arr) => {
- 
     let srchTrue = nodeArgs[3];
     //Combining multiword search arguments
-
     for (var i = 4; i < arr.length; i++) {        
-        if (i > 2 && i < arr.length) {
-            
+        if (i > 2 && i < arr.length) {            
             srchTrue = srchTrue + "+" + arr[i];
-        } else {
-            
+        } else {            
             srchTrue += arr[i];      
         }
     }
-    
-    //Choosing a command path
-    if (cmdIn === concertSearch) {
-        conFunc(srchTrue);    
-    } else if (cmdIn === spotifySearch) {
-        spotFunc(srchTrue);
-    } else if (cmdIn === movieSearch) {
-        console.log("These movies are censored");
-        var conArt = srchIn;
-        console.log(conArt)
-    } else if (cmdIn === randomPick) {
-        console.log("Good. You are under my control");
-        var conArt = srchIn;
-        console.log(conArt)
-    } else {
-        console.log("Bruh, you gotta pick one");
-    } 
+    //Function picks a path to send user args into
+    path = (a,b) => {        
+        
+        //Choosing a command path
+        if (a === concertSearch) {
+            conFunc(b);    
+        } else if (a === spotifySearch) {
+            spotFunc(b);
+        } else if (a === movieSearch) {
+            movieFunc(b);
+        } else {
+            console.log("Bruh, you gotta pick one");
+        } 
+    }    
 
+    //Function runs cmds from random.txt
+    if (cmdIn === randomPick) {        
+        fs.readFile('random.txt', 'utf8', function(err, data){
+            if (err) throw err;           
+            var dataArr = data.split(",");
+            var cmd = (dataArr[0]);
+            var srch = (dataArr[1]);
+            
+            var replaced = srch.split(' ').join('+');
+            
+            path(cmd,replaced);
+        });
+    } else {
+        path(cmdIn, srchTrue);
+    }
+   
 }
+
+//Initializing program with cmdHandle
 cmdHandler(nodeArgs);
