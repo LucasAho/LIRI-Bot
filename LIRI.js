@@ -22,6 +22,15 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
+//Appends all pertinent console info to log.txt
+logWriter = (log) => {
+    fs.appendFile("log.txt", log + (" "), function(err) {
+
+        if (err) {
+            console.log(err)
+        }
+    })
+}
 
 //Handler chooses path to use for URL and runs it into axios
 axiosHandler = (url, path) => {
@@ -31,16 +40,37 @@ axiosHandler = (url, path) => {
             //Decision tree to pick API to use
             if (nodeArgs.length === 3 && branch === concertSearch && cmdIn !== randomPick) {
                 console.log("Please enter a band to see if a show is coming near you!");
+                var logged ="\nPlease enter a band to see if a show is coming near you!";
+                logWriter(logged);
             } else if (response.data.length === 0 && branch === concertSearch) {
-                console.log("No upcoming shows, sorry!")
+                console.log("No upcoming shows, sorry!");
+                var logged = "\nNo upcoming shows, sorry!";
+                logWriter(logged);
             } else if (branch === concertSearch) {
+                
                 console.log("Your band is playing at " + response.data[0].venue.name);
                 console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
                 let dateRaw = response.data[0].datetime;
                 var moment = require('moment');
                 moment(dateRaw).format("MM/DD/YYYY");
                 console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
+                var logged = [
+                    "\nYour band is playing at " + response.data[0].venue.name,
+                    "\nIn " + response.data[0].venue.city + ", " + response.data[0].venue.country,
+                    "\nOn " + moment(dateRaw).format("MM/DD/YYYY")
+                ]
+                logWriter(logged);
             } else if (branch === movieSearch) {
+                var logged = [
+                    "\nMovie Title: " + response.data.Title,
+                    "\nRelease Year: " + response.data.Year,
+                    "\nIMDB Rating: " + response.data.Ratings[0].Value,
+                    "\nRotten Tomatoes Rating: " + + response.data.Ratings[1].Value,
+                    "\nCountry of Production: " + response.data.Country,
+                    "\nLanguage(s) of Film: " + response.data.Language,
+                    "\nPlot Summary: " + response.data.Plot,
+                    "\nLead Actors: " + response.data.Actors,
+                ]
                 console.log("Movie Title: " + response.data.Title);
                 console.log("Release Year: " + response.data.Year);
                 console.log("IMDB Rating: " + response.data.Ratings[0].Value);
@@ -49,6 +79,7 @@ axiosHandler = (url, path) => {
                 console.log("Language(s) of Film: " + response.data.Language);
                 console.log("Plot Summary: " + response.data.Plot);
                 console.log("Lead Actors: " + response.data.Actors);
+                logWriter(logged);
             }            
     })
     .catch(function(error) {
@@ -98,20 +129,32 @@ spotFunc = (str) => {
     if (str === undefined) {
         //This song will be searched if no argument is entered
         str = "The Sign";
-    }
+    } 
+    console.log(str);
     //Spotify api search
     spotify
     .search({type: 'track', query: str, limit: 10
     }).then(function(response) {
         console.log("Here are the top relevant tracks: ")
         response.tracks.items.forEach(function(element) {
+            
             var elIndex = response.tracks.items.indexOf(element);
+            console.log(elIndex);
             console.log("Track " + elIndex);
             console.log("Song Name: " + response.tracks.items[elIndex].name);
             console.log("Song Artist: " + response.tracks.items[elIndex].artists[0].name);
             console.log("Album Name: " + response.tracks.items[elIndex].album.name);
             console.log("Song Link: " + response.tracks.items[elIndex].external_urls.spotify);
             console.log();
+            
+            var logged = [
+                "\nHere are the top relevant tracks: ",
+                "\nTrack " + elIndex,
+                "\nSong Name: " + response.tracks.items[elIndex].name,
+                "\nAlbum Name: " + response.tracks.items[elIndex].album.name,
+                "\n Song Link: " + response.tracks.items[elIndex].external_urls.spotify
+            ]
+            logWriter(logged);
         })       
     })
     .catch(function(err) {
@@ -123,6 +166,7 @@ spotFunc = (str) => {
 //Checks initial command
 cmdHandler = (arr) => {
     let srchTrue = nodeArgs[3];
+    
     //Combining multiword search arguments
     for (var i = 4; i < arr.length; i++) {        
         if (i > 2 && i < arr.length) {            
@@ -131,6 +175,8 @@ cmdHandler = (arr) => {
             srchTrue += arr[i];      
         }
     }
+    var logged = [nodeArgs[2],srchTrue];
+    logWriter(logged);
     //Function picks a path to send user args into
     path = (a,b) => {        
         
@@ -143,6 +189,8 @@ cmdHandler = (arr) => {
             movieFunc(b);
         } else {
             console.log("Bruh, you gotta pick one");
+            var logged = "Bruh, you gotta pick one";
+            logWriter(logged);
         } 
     }    
 
@@ -152,8 +200,7 @@ cmdHandler = (arr) => {
             if (err) throw err;           
             var dataArr = data.split(",");
             var cmd = (dataArr[0]);
-            var srch = (dataArr[1]);
-            
+            var srch = (dataArr[1]);            
             var replaced = srch.split(' ').join('+');
             
             path(cmd,replaced);
