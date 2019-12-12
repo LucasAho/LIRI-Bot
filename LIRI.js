@@ -2,6 +2,8 @@
     //Screenshots/GIF/and/or video format showing working app
         //link to ^ in README
 
+
+
 //requires
 var axios = require("axios");
 var fs = require('fs');
@@ -47,13 +49,14 @@ axiosHandler = (url, path) => {
                 var logged = "\nNo upcoming shows, sorry!";
                 logWriter(logged);
             } else if (branch === concertSearch) {
-                
-                console.log("Your band is playing at " + response.data[0].venue.name);
-                console.log("In " + response.data[0].venue.city + ", " + response.data[0].venue.country);
                 let dateRaw = response.data[0].datetime;
                 var moment = require('moment');
                 moment(dateRaw).format("MM/DD/YYYY");
-                console.log("On " + moment(dateRaw).format("MM/DD/YYYY"));
+
+                console.log("Your band is playing at " + response.data[0].venue.name + 
+                "\nIn " + response.data[0].venue.city + ", " + response.data[0].venue.country + 
+                "\nOn " + moment(dateRaw).format("MM/DD/YYYY"));
+
                 var logged = [
                     "\nYour band is playing at " + response.data[0].venue.name,
                     "\nIn " + response.data[0].venue.city + ", " + response.data[0].venue.country,
@@ -61,25 +64,33 @@ axiosHandler = (url, path) => {
                 ]
                 logWriter(logged);
             } else if (branch === movieSearch) {
+                if (response.data.Ratings.length === 1) {
+                    var IMDB = response.data.Ratings[0].Value;
+                    var rotTom = "Unavailable";
+                } else {
+                    var IMDB = response.data.Ratings[0].Value;
+                    var rotTom = response.data.Ratings[1].Value;
+                }
                 var logged = [
                     "\nMovie Title: " + response.data.Title,
                     "\nRelease Year: " + response.data.Year,
-                    "\nIMDB Rating: " + response.data.Ratings[0].Value,
-                    "\nRotten Tomatoes Rating: " + + response.data.Ratings[1].Value,
+                    "\nIMDB Rating: " + IMDB,
+                    "\nRotten Tomatoes Rating: " +  rotTom,
                     "\nCountry of Production: " + response.data.Country,
                     "\nLanguage(s) of Film: " + response.data.Language,
                     "\nPlot Summary: " + response.data.Plot,
                     "\nLead Actors: " + response.data.Actors,
                 ]
-                console.log("Movie Title: " + response.data.Title);
-                console.log("Release Year: " + response.data.Year);
-                console.log("IMDB Rating: " + response.data.Ratings[0].Value);
-                console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
-                console.log("Country of Production: " + response.data.Country);
-                console.log("Language(s) of Film: " + response.data.Language);
-                console.log("Plot Summary: " + response.data.Plot);
-                console.log("Lead Actors: " + response.data.Actors);
+                console.log("Movie Title: " + response.data.Title + 
+                "\nRelease Year: " + response.data.Year +
+                "\nIMDB Rating: " + IMDB +
+                "\nRotten Tomatoes Rating: " + rotTom +
+                "\nCountry of Production: " + response.data.Country + 
+                "\nLanguage(s) of Film: " + response.data.Language +
+                "\nPlot Summary: " + response.data.Plot +
+                "\nLead Actors: " + response.data.Actors);
                 logWriter(logged);
+                console.log(response.data)
             }            
     })
     .catch(function(error) {
@@ -139,12 +150,11 @@ spotFunc = (str) => {
             
             var elIndex = response.tracks.items.indexOf(element);
             var indexNum = parseInt(elIndex) + 1;
-            console.log("Track " + indexNum);
-            console.log("Song Name: " + response.tracks.items[elIndex].name);
-            console.log("Song Artist: " + response.tracks.items[elIndex].artists[0].name);
-            console.log("Album Name: " + response.tracks.items[elIndex].album.name);
-            console.log("Song Link: " + response.tracks.items[elIndex].external_urls.spotify);
-            console.log();
+            console.log("Track " + indexNum + 
+            "\nSong Name: " + response.tracks.items[elIndex].name + 
+            "\nSong Artist: " + response.tracks.items[elIndex].artists[0].name +
+            "\nAlbum Name: " + response.tracks.items[elIndex].album.name + 
+            "\nSong Link: " + response.tracks.items[elIndex].external_urls.spotify  + "\n\n");
             
             var logged = [
                 "\nHere are the top relevant tracks: ",
