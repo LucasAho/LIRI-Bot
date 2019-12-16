@@ -90,7 +90,6 @@ axiosHandler = (url, path) => {
                 "\nPlot Summary: " + response.data.Plot +
                 "\nLead Actors: " + response.data.Actors);
                 logWriter(logged);
-                console.log(response.data)
             }            
     })
     .catch(function(error) {
