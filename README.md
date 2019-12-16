@@ -35,33 +35,33 @@ While the repository will give you all the files necessary to run the concert an
 ### Screenshots and Gifs of Functions
 
 #### Concert Searches
-
-* ![Image of Concert Searches](Assets\Screenshots\ConcertSearch.png)
-* ![Gif of Concert Default](Assets\Gifs\ConcertDefault-Gif.gif)
-* ![Gif of Concert Search](Assets\Gifs\ConcertSearch-Gif.gif)
+                                
+* ![Image of Concert Searches](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/ConcertSearch.png)
+* ![Gif of Concert Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertDefault-Gif.gif)
+* ![Gif of Concert Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertSearch-Gif.gif)
 
 #### Movie Searches
 
-* ![Image of Movie Search](Assets\Screenshots\MovieSearch.png)
-* ![Gif of Movie Default](Assets\Gifs\MovieDefault-Gif.gif)
-* ![Gif of Movie Search](Assets\Gifs\MovieSearch-Gif.gif)
+* ![Image of Movie Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/MovieSearch.png)
+* ![Gif of Movie Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieDefault-Gif.gif)
+* ![Gif of Movie Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieSearch-Gif.gif)
 
 
 #### Spotify Searches
 
-* ![Image of Spotify Default](Assets\Screenshots\SpotifyDefault.png)
-* ![Image of Spotify Search](Assets\Screenshots\SpotifySearch.png)
-* ![Gif of Spotify Default](Assets\Gifs\SpotifyDefault-Gif.gif)
-* ![Gif of Spotify Search](Assets\Gifs\SpotifySearch-Gif.gif)
+* ![Image of Spotify Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/SpotifyDefault.png)
+* ![Image of Spotify Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/SpotifySearch.png)
+* ![Gif of Spotify Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifyDefault-Gif.gif)
+* ![Gif of Spotify Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifySearch-Gif.gif)
 
 #### Random Command
-* ![Image of Random Movie](Assets\Screenshots\RandomMovie.png)
-* ![Image of Random Spotify](Assets\Screenshots\RandomSpotify.png)
-* ![Image of Random Concert](Assets\Screenshots\RandomConcert.png)
-* ![Gif of Random Movie](Assets\Gifs\MovieRandom-Gif.gif)
-* ![Gif of Random Spotify](Assets\Gifs\SpotifyRandom-Gif.gif)
-* ![Gif of Random Concert](Assets\Gifs\ConcertRandom-Gif.gif)
+* ![Image of Random Movie](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomMovie.png)
+* ![Image of Random Spotify](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomSpotify.png)
+* ![Image of Random Concert](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomConcert.png)
+* ![Gif of Random Movie](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieRandom-Gif.gif)
+* ![Gif of Random Spotify](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifyRandom-Gif.gif)
+* ![Gif of Random Concert](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertRandom-Gif.gif)
 
 #### Bonus Log File
-* ![Image of Log File Contents](Assets\Screenshots\LogFile.png)
-* ![Gif of Logging Functions](Assets\Gifs\LogFile-Gif.gif)
+* ![Image of Log File Contents](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/LogFile.png)
+* ![Gif of Logging Functions](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/LogFile-Gif.gif)
