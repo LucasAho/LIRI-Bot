@@ -1,5 +1,5 @@
 # LIRI-Bot
-Its like SIRI! But instead of Speach Interpretation, LIRI interprets terminal commands to search for songs, concerts, and movies, and logs all relevant info to a txt file and terminal. It does this through a multitude of APIs and js programs. As proof that the project fills out the assignment outline, visit https://docs.google.com/presentation/d/1OHnlQe3L3DP8pS_BrzDBiYZGjtU9CC9Vx-YXrP_qmec/edit?usp=sharing to view screenshots of each function.
+Its like SIRI! But instead of Speach Interpretation, LIRI interprets terminal commands to search for songs, concerts, and movies, and logs all relevant info to a txt file and terminal. It does this through a multitude of APIs and js programs. To view screenshots and gifs of the working app, just checkout the bottom of the README!
 
 ## App Purpose and Function
 This CLI allows a user to search for songs, concerts, and movies from one location, allowing the user to find relevant info based on their searches. The user can use the app by typing 
@@ -31,3 +31,37 @@ Remaining files are npm installs through node.
 
 ### Installing and running your own LIRI
 While the repository will give you all the files necessary to run the concert and movie searches, you will need to create your own env file with your own spotify keys to run the API. The formatting and instructions on doing this are listed above in the .env file description. Then navigate to the LIRI-BOT directory and open a terminal. From here you can use the commands given in the description to search for concerts, songs, and movies.
+
+### Screenshots and Gifs of Functions
+
+#### Concert Searches
+
+* ![Image of Concert Searches](Assets\Screenshots\ConcertSearch.png)
+* ![Gif of Concert Default](Assets\Gifs\ConcertDefault-Gif.gif)
+* ![Gif of Concert Search](Assets\Gifs\ConcertSearch-Gif.gif)
+
+#### Movie Searches
+
+* ![Image of Movie Search](Assets\Screenshots\MovieSearch.png)
+* ![Gif of Movie Default](Assets\Gifs\MovieDefault-Gif.gif)
+* ![Gif of Movie Search](Assets\Gifs\MovieSearch-Gif.gif)
+
+
+#### Spotify Searches
+
+* ![Image of Spotify Default](Assets\Screenshots\SpotifyDefault.png)
+* ![Image of Spotify Search](Assets\Screenshots\SpotifySearch.png)
+* ![Gif of Spotify Default](Assets\Gifs\SpotifyDefault-Gif.gif)
+* ![Gif of Spotify Search](Assets\Gifs\SpotifySearch-Gif.gif)
+
+#### Random Command
+* ![Image of Random Movie](Assets\Screenshots\RandomMovie.png)
+* ![Image of Random Spotify](Assets\Screenshots\RandomSpotify.png)
+* ![Image of Random Concert](Assets\Screenshots\RandomConcert.png)
+* ![Gif of Random Movie](Assets\Gifs\MovieRandom-Gif.gif)
+* ![Gif of Random Spotify](Assets\Gifs\SpotifyRandom-Gif.gif)
+* ![Gif of Random Concert](Assets\Gifs\ConcertRandom-Gif.gif)
+
+#### Bonus Log File
+* ![Image of Log File Contents](Assets\Screenshots\LogFile.png)
+* ![Gif of Logging Functions](Assets\Gifs\LogFile-Gif.gif)
