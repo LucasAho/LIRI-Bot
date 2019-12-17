@@ -35,33 +35,44 @@ While the repository will give you all the files necessary to run the concert an
 ### Screenshots and Gifs of Functions
 
 #### Concert Searches
-                                
+Image of Concert Input/Output              
 * ![Image of Concert Searches](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/ConcertSearch.png)
+Gif showing concert search without second input
 * ![Gif of Concert Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertDefault-Gif.gif)
+Gif showing concert with actual search value
 * ![Gif of Concert Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertSearch-Gif.gif)
 
 #### Movie Searches
-
+Image of Movie Input/Output    
 * ![Image of Movie Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/MovieSearch.png)
+Gif showing movie search without second input
 * ![Gif of Movie Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieDefault-Gif.gif)
+Gif showing movie search with value to search
 * ![Gif of Movie Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieSearch-Gif.gif)
 
 
 #### Spotify Searches
-
+Image of Spotify Default Input/Output    
 * ![Image of Spotify Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/SpotifyDefault.png)
+Image of Spotify Search Input/Output   
 * ![Image of Spotify Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/SpotifySearch.png)
+Gif of Spotify Default Input/Output  
 * ![Gif of Spotify Default](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifyDefault-Gif.gif)
+Gif of Spotify Search Input/Output  
 * ![Gif of Spotify Search](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifySearch-Gif.gif)
 
 #### Random Command
+Images of random.txt file working with movie, concert, and song searches
 * ![Image of Random Movie](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomMovie.png)
 * ![Image of Random Spotify](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomSpotify.png)
 * ![Image of Random Concert](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/RandomConcert.png)
+Gifs of realtime input/output with random.txt
 * ![Gif of Random Movie](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/MovieRandom-Gif.gif)
 * ![Gif of Random Spotify](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/SpotifyRandom-Gif.gif)
 * ![Gif of Random Concert](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/ConcertRandom-Gif.gif)
 
 #### Bonus Log File
+Image shows contents of log.txt file
 * ![Image of Log File Contents](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Screenshots/LogFile.png)
+Gif shows off log.txt file and it's innerworkings with JS and the terminal.
 * ![Gif of Logging Functions](https://github.com/LucasAho/LIRI-Bot/blob/master/Assets/Gifs/LogFile-Gif.gif)
